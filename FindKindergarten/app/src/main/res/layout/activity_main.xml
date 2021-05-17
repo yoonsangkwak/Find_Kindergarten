@@ -39,47 +39,52 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <Spinner
-            android:id="@+id/main_sido_code_spinner"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/main_search_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:spinnerMode="dialog"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/main_recycler_view"
-            app:layout_constraintEnd_toStartOf="@id/main_sgg_code_spinner"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/main_toolbar">
 
-        <Spinner
-            android:id="@+id/main_sgg_code_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:spinnerMode="dialog"
-            app:layout_constraintBottom_toTopOf="@id/main_recycler_view"
-            app:layout_constraintEnd_toStartOf="@id/main_search_button"
-            app:layout_constraintStart_toEndOf="@id/main_sido_code_spinner"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
+            <Spinner
+                android:id="@+id/main_sido_code_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:spinnerMode="dialog" />
 
-        <Button
-            android:id="@+id/main_search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="검색"
-            app:layout_constraintBottom_toTopOf="@id/main_recycler_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/main_sgg_code_spinner"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
+            <Spinner
+                android:id="@+id/main_sgg_code_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:spinnerMode="dialog" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/main_search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:background="@drawable/search_button_background"
+                android:text="검색"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_sido_code_spinner" />
+            app:layout_constraintTop_toBottomOf="@id/main_search_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

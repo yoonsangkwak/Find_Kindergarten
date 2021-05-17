@@ -12,12 +12,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import site.yoonsang.findkindergarten.R
 import site.yoonsang.findkindergarten.databinding.ActivityMainBinding
+import site.yoonsang.findkindergarten.model.KindergartenInfo
 import site.yoonsang.findkindergarten.viewmodel.MainViewModel
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KindergartenPagingAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModels<MainViewModel>()
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        val adapter = KindergartenPagingAdapter()
+        val adapter = KindergartenPagingAdapter(this)
         binding.mainRecyclerView.adapter = adapter
 
         binding.mainSearchButton.setOnClickListener {
@@ -90,6 +91,10 @@ class MainActivity : AppCompatActivity() {
                     adapter.submitData(lifecycle, data)
                 }
         }
+    }
+
+    override fun onItemClick(kindergartenInfo: KindergartenInfo) {
+        TODO("Not yet implemented")
     }
 
     private fun setSidoList(): ArrayList<String> {

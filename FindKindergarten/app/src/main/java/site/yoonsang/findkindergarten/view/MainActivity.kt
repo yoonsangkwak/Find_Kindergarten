@@ -6,27 +6,39 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import site.yoonsang.findkindergarten.R
 import site.yoonsang.findkindergarten.databinding.ActivityMainBinding
+import site.yoonsang.findkindergarten.viewmodel.MainViewModel
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel by viewModels<MainViewModel>()
+    private lateinit var sido: String
+    private lateinit var sgg: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         val sidoList = setSidoList()
         val sidoAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, sidoList)
         binding.mainSidoCodeSpinner.adapter = sidoAdapter
 
-        binding.mainSidoCodeSpinner.onItemSelectedListener = (object :
+        var region = ""
+
+        binding.mainSidoCodeSpinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -34,8 +46,9 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val sido = binding.mainSidoCodeSpinner.selectedItem.toString()
-                val region = convertRegion(sido)
+                sido = binding.mainSidoCodeSpinner.selectedItem.toString()
+                viewModel.sidoCode.value = convertSidoCode(sido)
+                region = convertRegion(sido)
                 val sggList = setSggList(region)
                 val sggAdapter =
                     ArrayAdapter(
@@ -49,7 +62,34 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 Log.d("checkkk", "onNothingSelected")
             }
-        })
+        }
+
+        binding.mainSggCodeSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    sgg = binding.mainSggCodeSpinner.selectedItem.toString()
+                    viewModel.sggCode.value = convertSggCode(sgg, region)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    Log.d("checkkk", "onNothingSelected")
+                }
+            }
+
+        val adapter = KindergartenPagingAdapter()
+        binding.mainRecyclerView.adapter = adapter
+
+        binding.mainSearchButton.setOnClickListener {
+            viewModel.getKindergartenInfo(convertSidoCode(sido), convertSggCode(sgg, region))
+                .observe(this) { data ->
+                    adapter.submitData(lifecycle, data)
+                }
+        }
     }
 
     private fun setSidoList(): ArrayList<String> {
@@ -72,6 +112,40 @@ class MainActivity : AppCompatActivity() {
             sidoList.add(sido)
         }
         return sidoList
+    }
+
+    private fun convertSidoCode(sido: String): Int {
+        val assetManager = resources.assets
+        val inputStream = assetManager.open("sido.json")
+        val inputStreamReader = InputStreamReader(inputStream)
+        val reader = BufferedReader(inputStreamReader)
+
+        val buffer = StringBuffer()
+        var line = reader.readLine()
+        while (line != null) {
+            buffer.append(line + "\n")
+            line = reader.readLine()
+        }
+        val jsonData = buffer.toString()
+        val jsonObject = JSONObject(jsonData)
+        return jsonObject.optInt(sido)
+    }
+
+    private fun convertSggCode(sgg: String, region: String): Int {
+        val assetManager = resources.assets
+        val inputStream = assetManager.open("${region}.json")
+        val inputStreamReader = InputStreamReader(inputStream)
+        val reader = BufferedReader(inputStreamReader)
+
+        val buffer = StringBuffer()
+        var line = reader.readLine()
+        while (line != null) {
+            buffer.append(line + "\n")
+            line = reader.readLine()
+        }
+        val jsonData = buffer.toString()
+        val jsonObject = JSONObject(jsonData)
+        return jsonObject.optInt(sgg)
     }
 
     private fun setSggList(region: String): ArrayList<String> {

@@ -1,4 +1,4 @@
-package site.yoonsang.findkindergarten.view
+package site.yoonsang.findkindergarten.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -8,14 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import site.yoonsang.findkindergarten.R
 import site.yoonsang.findkindergarten.databinding.FragmentSearchBinding
 import site.yoonsang.findkindergarten.model.KindergartenInfo
+import site.yoonsang.findkindergarten.view.adapter.KindergartenLoadStateAdapter
+import site.yoonsang.findkindergarten.view.adapter.KindergartenPagingAdapter
 import site.yoonsang.findkindergarten.viewmodel.SearchViewModel
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -90,7 +94,10 @@ class SearchFragment : Fragment(), KindergartenPagingAdapter.OnItemClickListener
             }
 
         val adapter = KindergartenPagingAdapter(this)
-        binding.searchRecyclerView.adapter = adapter
+        binding.searchRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = KindergartenLoadStateAdapter { adapter.retry() },
+            footer = KindergartenLoadStateAdapter { adapter.retry() }
+        )
 
         binding.searchSearchButton.setOnClickListener {
             viewModel.getKindergartenInfo(
@@ -103,6 +110,11 @@ class SearchFragment : Fragment(), KindergartenPagingAdapter.OnItemClickListener
             adapter.submitData(viewLifecycleOwner.lifecycle, data)
         }
 
+        adapter.addLoadStateListener { loadState ->
+            binding.searchProgressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            binding.searchRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            binding.searchErrorText.isVisible = loadState.source.refresh is LoadState.Error
+        }
     }
 
     override fun onItemClick(kindergartenInfo: KindergartenInfo) {

@@ -1,5 +1,6 @@
 package site.yoonsang.findkindergarten.repository
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import retrofit2.HttpException
@@ -36,11 +37,13 @@ class KindergartenPagingSource(
             LoadResult.Page(
                 data = kinderInfo,
                 prevKey = if (position == SHOW_STARTING_PAGE_INDEX) null else position - 1,
-                nextKey = if (kinderInfo.size < ITEM_MEMBERS_IN_PAGE) null else position + 1
+                nextKey = if (kinderInfo.isEmpty()) null else position + 1
             )
         } catch (e: IOException) {
+            Log.d("checkkk", "IO ${e.message}")
             LoadResult.Error(e)
         } catch (e: HttpException) {
+            Log.d("checkkk", "Http ${e.message}")
             LoadResult.Error(e)
         }
     }

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="site.yoonsang.findkindergarten.viewmodel.MainViewModel" />
+            type="site.yoonsang.findkindergarten.viewmodel.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,52 +39,14 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
-            android:id="@+id/main_search_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/main_recycler_view"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar">
-
-            <Spinner
-                android:id="@+id/main_sido_code_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:spinnerMode="dialog" />
-
-            <Spinner
-                android:id="@+id/main_sgg_code_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:spinnerMode="dialog" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/main_search_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:background="@drawable/search_button_background"
-                android:text="검색"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_recycler_view"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_fragment_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_search_layout" />
-
+            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+            app:navGraph="@navigation/nav_graph" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

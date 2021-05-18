@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="kindergartenInfo"
+            type="site.yoonsang.findkindergarten.model.KindergartenInfo" />
+
+        <variable
+            name="noInfo"
+            type="String" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            tools:context=".view.DetailFragment">
+
+            <TextView
+                android:id="@+id/detail_kindername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@{kindergartenInfo.kindername}"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="무슨유치원" />
+
+            <TableLayout
+                android:id="@+id/detail_info_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_kindername">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="설립유형"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{kindergartenInfo.establish}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="교육청명"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{kindergartenInfo.officeedu}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="교육지원청명"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{kindergartenInfo.subofficeedu}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="원장명"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{kindergartenInfo.ldgrname}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="홈페이지"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{kindergartenInfo.hpaddr}"
+                        android:textColor="@color/link" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="전화번호"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{kindergartenInfo.telno}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="운영시간"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{kindergartenInfo.opertime}"
+                        android:textColor="@color/black" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_info_table">
+
+                <TableRow
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="만3세 학급수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.clcnt3 ?? noInfo}"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="만3세 유아수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.ppcnt3 ?? noInfo}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="만4세 학급수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.clcnt4 ?? noInfo}"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="만4세 유아수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.ppcnt4 ?? noInfo}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="만5세 학급수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.clcnt5 ?? noInfo}"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="만5세 유아수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.ppcnt5 ?? noInfo}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="혼합 학급수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.mixclcnt ?? noInfo}"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="혼합 유아수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.mixppcnt ?? noInfo}"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="특수 학급수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.shclcnt ?? noInfo}"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="특수 유아수"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@{kindergartenInfo.shppcnt ?? noInfo}"
+                        android:textColor="@color/black" />
+                </TableRow>
+            </TableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

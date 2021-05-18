@@ -25,6 +25,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_KEY", properties['API_KEY'])
+        buildConfigField("String", "KAKAO_KEY", properties['KAKAO_KEY'])
     }
 
     buildFeatures {
@@ -93,4 +94,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    // Kakao Local
+    implementation files('libs/libDaumMapAndroid.jar')
 }

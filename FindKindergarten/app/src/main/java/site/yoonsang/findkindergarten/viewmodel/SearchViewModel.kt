@@ -1,10 +1,8 @@
 package site.yoonsang.findkindergarten.viewmodel
 
 import androidx.lifecycle.*
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
-import site.yoonsang.findkindergarten.model.KindergartenInfo
 import site.yoonsang.findkindergarten.repository.KindergartenRepository
 import site.yoonsang.findkindergarten.util.DoubleTrigger
 import javax.inject.Inject
@@ -13,8 +11,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val repository: KindergartenRepository) :
     ViewModel() {
 
-    val sidoCode = MutableLiveData<Int>()
-    val sggCode = MutableLiveData<Int>()
+    private val sidoCode = MutableLiveData<Int>()
+    private val sggCode = MutableLiveData<Int>()
 
     init {
         sidoCode.value = 0

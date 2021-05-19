@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@{kindergartenInfo.kindername}"
+                android:text="@{kindergartenInfo.kindername ?? noInfo}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -39,32 +39,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="무슨유치원" />
 
-            <RelativeLayout
-                android:id="@+id/detail_map_view_container"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_margin="8dp"
-                app:layout_constraintBottom_toTopOf="@id/detail_address"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_kindername" />
-
-            <TextView
-                android:id="@+id/detail_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@{kindergartenInfo.addr}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_map_view_container" />
-
             <TableLayout
                 android:id="@+id/detail_info_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_address">
+                app:layout_constraintTop_toBottomOf="@id/detail_kindername">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -83,7 +64,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{kindergartenInfo.establish}"
+                        android:text="@{kindergartenInfo.establish ?? noInfo}"
                         android:textColor="@color/black" />
                 </TableRow>
 
@@ -104,7 +85,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{kindergartenInfo.officeedu}"
+                        android:text="@{kindergartenInfo.officeedu ?? noInfo}"
                         android:textColor="@color/black" />
                 </TableRow>
 
@@ -125,7 +106,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{kindergartenInfo.subofficeedu}"
+                        android:text="@{kindergartenInfo.subofficeedu ?? noInfo}"
                         android:textColor="@color/black" />
                 </TableRow>
 
@@ -146,7 +127,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{kindergartenInfo.ldgrname}"
+                        android:text="@{kindergartenInfo.ldgrname ?? noInfo}"
                         android:textColor="@color/black" />
                 </TableRow>
 
@@ -165,9 +146,10 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/detail_hompage_link"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{kindergartenInfo.hpaddr}"
+                        android:text="@{kindergartenInfo.hpaddr ?? noInfo}"
                         android:textColor="@color/link" />
                 </TableRow>
 
@@ -186,10 +168,11 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/detail_tel_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{kindergartenInfo.telno}"
-                        android:textColor="@color/black" />
+                        android:text="@{kindergartenInfo.telno ?? noInfo}"
+                        android:textColor="@color/link" />
                 </TableRow>
 
                 <TableRow
@@ -209,15 +192,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{kindergartenInfo.opertime}"
+                        android:text="@{kindergartenInfo.opertime ?? noInfo}"
                         android:textColor="@color/black" />
                 </TableRow>
             </TableLayout>
 
             <TableLayout
+                android:id="@+id/detail_kids_info_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/detail_address"
                 app:layout_constraintTop_toBottomOf="@id/detail_info_table">
 
                 <TableRow
@@ -360,6 +344,41 @@
                         android:textColor="@color/black" />
                 </TableRow>
             </TableLayout>
+
+            <TextView
+                android:id="@+id/detail_address_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="주소 : "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/detail_map_view_container"
+                app:layout_constraintTop_toBottomOf="@id/detail_kids_info_table" />
+
+            <TextView
+                android:id="@+id/detail_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{kindergartenInfo.addr}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/detail_address_text"
+                app:layout_constraintTop_toBottomOf="@id/detail_kids_info_table" />
+
+
+            <RelativeLayout
+                android:id="@+id/detail_map_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_address" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -10,7 +10,7 @@ interface KindergartenLocationApi {
         const val BASE_URL = "https://dapi.kakao.com/"
     }
 
-    @GET("/v2/local/search/address.json")
+    @GET("/v2/local/search/keyword.json")
     suspend fun getKindergartenLocation(
         @Query("query") query: String,
         @Query("analyze_type") analyzeType: String? = "exact"
